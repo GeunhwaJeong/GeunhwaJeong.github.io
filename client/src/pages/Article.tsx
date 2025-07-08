@@ -1,7 +1,7 @@
 import { useParams } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
-import { ArrowLeft, Clock, User } from "lucide-react";
+import { ArrowLeft, User } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -99,11 +99,6 @@ export default function Article() {
         <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
           {article.title}
         </h1>
-        
-        <div className="flex items-center text-sm text-muted-foreground">
-          <Clock className="h-4 w-4 mr-1" />
-          <span>{article.readTime} min read</span>
-        </div>
       </header>
 
       {/* Article content */}

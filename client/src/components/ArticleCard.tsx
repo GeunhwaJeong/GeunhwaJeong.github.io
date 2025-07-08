@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -47,11 +47,7 @@ export function ArticleCard({ article }: ArticleCardProps) {
           {article.excerpt}
         </p>
         
-        <div className="flex items-center justify-between">
-          <div className="flex items-center text-sm text-muted-foreground">
-            <Clock className="h-4 w-4 mr-1" />
-            <span>{article.readTime} min read</span>
-          </div>
+        <div className="flex items-center justify-end">
           <Link href={`/article/${article.slug}`}>
             <a className="text-secondary hover:text-secondary/80 font-medium text-sm transition-colors inline-flex items-center">
               Read more
