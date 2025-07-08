@@ -30,7 +30,7 @@ export function Header() {
           <div className="flex items-center space-x-4">
             <Link href="/">
               <h1 className="text-xl font-bold text-primary hover:text-secondary transition-colors cursor-pointer">
-                Geunhwa Jeong
+                Geunhwa Jeong's Website
               </h1>
             </Link>
           </div>
