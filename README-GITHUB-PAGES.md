@@ -48,9 +48,14 @@ git push -u origin main
 1. Go to your repository on GitHub
 2. Click on "Settings" tab
 3. Scroll down to "Pages" section
-4. Under "Source", select "Deploy from a branch"
-5. Select "main" branch and "/docs" folder
-6. Click "Save"
+4. Under "Source", select "GitHub Actions"
+5. The workflow will automatically deploy when you push to main branch
+
+**Important**: Make sure your repository has the following permissions:
+- Go to Settings > Actions > General
+- Under "Workflow permissions", select "Read and write permissions"
+- Check "Allow GitHub Actions to create and approve pull requests"
+- Click "Save"
 
 ## Step 5: Set Up Custom Domain (Optional)
 
