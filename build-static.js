@@ -67,12 +67,42 @@ async function buildStatic() {
     await fs.writeFile(resolve(__dirname, 'docs/.nojekyll'), '');
     console.log('✅ Created .nojekyll file');
     
+    // Copy files to root directory for GitHub Pages
+    const rootDir = resolve(__dirname);
+    await fs.copyFile(indexPath, resolve(rootDir, 'index.html'));
+    await fs.copyFile(resolve(__dirname, 'docs/.nojekyll'), resolve(rootDir, '.nojekyll'));
+    
+    // Copy assets directory
+    const assetsSourceDir = resolve(__dirname, 'docs/assets');
+    const assetsDestDir = resolve(rootDir, 'assets');
+    
+    try {
+      await fs.rm(assetsDestDir, { recursive: true, force: true });
+    } catch (e) {
+      // Assets directory might not exist
+    }
+    
+    await fs.cp(assetsSourceDir, assetsDestDir, { recursive: true });
+    console.log('✅ Copied files to root directory for GitHub Pages');
+    
+    // Copy CNAME if it exists and is not a comment
+    const cnameSource = resolve(__dirname, 'docs/CNAME');
+    try {
+      const cnameContent = await fs.readFile(cnameSource, 'utf8');
+      if (cnameContent.trim() && !cnameContent.startsWith('#')) {
+        await fs.copyFile(cnameSource, resolve(rootDir, 'CNAME'));
+        console.log('✅ Copied CNAME file');
+      }
+    } catch (e) {
+      // CNAME file might not exist or might be empty
+    }
+    
     // List generated files
     const files = await fs.readdir(docsDir);
     console.log('📁 Generated files:', files.join(', '));
     
     console.log('🎉 Static site built successfully in ./docs folder!');
-    console.log('🚀 Ready for GitHub Pages deployment.');
+    console.log('🚀 Files also copied to root directory for GitHub Pages deployment.');
     
   } catch (error) {
     console.error('❌ Build failed:', error);

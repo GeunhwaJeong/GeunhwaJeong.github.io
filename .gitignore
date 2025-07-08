@@ -7,3 +7,9 @@ vite.config.ts.*
 
 # Keep docs folder for GitHub Pages
 !docs
+
+# Keep GitHub Pages files in root
+!index.html
+!assets/
+!.nojekyll
+!CNAME
