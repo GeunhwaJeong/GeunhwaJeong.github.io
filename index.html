@@ -1,41 +1,627 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geunhwa Jeong's Website</title>
-    <meta name="description" content="Personal blog by Geunhwa Jeong - sharing thoughts, insights, and explorations through writing" />
-    <meta name="author" content="Geunhwa Jeong" />
+    <meta name="description" content="Personal blog by Geunhwa Jeong - sharing thoughts, insights, and explorations through writing">
+    <meta name="author" content="Geunhwa Jeong">
     
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://geunhwajeong.github.io/" />
-    <meta property="og:title" content="Geunhwa Jeong's Website" />
-    <meta property="og:description" content="Personal blog by Geunhwa Jeong - sharing thoughts, insights, and explorations through writing" />
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://geunhwajeong.github.io/">
+    <meta property="og:title" content="Geunhwa Jeong's Website">
+    <meta property="og:description" content="Personal blog by Geunhwa Jeong - sharing thoughts, insights, and explorations through writing">
     
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:title" content="Geunhwa Jeong's Website" />
-    <meta property="twitter:description" content="Personal blog by Geunhwa Jeong - sharing thoughts, insights, and explorations through writing" />
-    <script type="module" crossorigin src="./assets/index.static-ClPU87ZQ.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-QsXDXl10.css">
-  </head>
-  <body>
-    <div id="root">
-      <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: system-ui, -apple-system, sans-serif;">
-        <div style="text-align: center;">
-          <h1 style="color: #333; margin-bottom: 16px;">Geunhwa Jeong's Website</h1>
-          <p style="color: #666;">Loading...</p>
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Geunhwa Jeong's Website">
+    <meta property="twitter:description" content="Personal blog by Geunhwa Jeong - sharing thoughts, insights, and explorations through writing">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: 2px solid #333;
+            border-radius: 4px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        .theme-toggle:hover {
+            background: #333;
+            color: white;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: #333;
+        }
+        
+        main {
+            padding: 2rem 0;
+        }
+        
+        .intro {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-bottom: 3rem;
+        }
+        
+        .intro h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .intro p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-section {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-filter {
+            padding: 0.5rem 1rem;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .category-filter:hover,
+        .category-filter.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .articles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .article-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+        
+        .article-card h2 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            line-height: 1.4;
+        }
+        
+        .article-card .meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .article-card p {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        
+        .category-tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .category-tag.technology { background: #667eea; }
+        .category-tag.personal { background: #f093fb; }
+        .category-tag.research { background: #4facfe; }
+        .category-tag.philosophy { background: #43e97b; }
+        .category-tag.lifestyle { background: #fa709a; }
+        
+        .read-more {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .read-more:hover {
+            text-decoration: underline;
+        }
+        
+        .about-section {
+            background: #f9f9f9;
+            padding: 4rem 0;
+            margin-top: 3rem;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+        
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .social-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        
+        .social-links a:hover {
+            background-color: #667eea;
+            color: white;
+        }
+        
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        /* Dark mode styles */
+        .dark-mode {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        
+        .dark-mode header {
+            background: #2d2d2d;
+            border-bottom-color: #444;
+        }
+        
+        .dark-mode .logo {
+            color: #e0e0e0;
+        }
+        
+        .dark-mode nav a {
+            color: #ccc;
+        }
+        
+        .dark-mode nav a:hover {
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .theme-toggle {
+            border-color: #e0e0e0;
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .theme-toggle:hover {
+            background: #e0e0e0;
+            color: #1a1a1a;
+        }
+        
+        .dark-mode .article-card {
+            background: #2d2d2d;
+            border-color: #444;
+        }
+        
+        .dark-mode .article-card h2 {
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .search-input {
+            background: #2d2d2d;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .category-filter {
+            background: #444;
+            color: #e0e0e0;
+        }
+        
+        .dark-mode .about-section {
+            background: #2d2d2d;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .intro h1 {
+                font-size: 2rem;
+            }
+            
+            .articles {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-filters {
+                gap: 0.5rem;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">Geunhwa Jeong's Website</a>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#articles">Articles</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
+            </div>
         </div>
-      </div>
-    </div>
+    </header>
+
+    <main>
+        <section class="intro" id="home">
+            <div class="container">
+                <h1>Welcome to My Blog</h1>
+                <p>Sharing thoughts, insights, and explorations through writing</p>
+            </div>
+        </section>
+
+        <section class="container">
+            <div class="search-section">
+                <input type="text" class="search-input" placeholder="Search articles..." id="searchInput">
+                <div class="category-filters">
+                    <button class="category-filter active" data-category="all">All</button>
+                    <button class="category-filter" data-category="technology">Technology</button>
+                    <button class="category-filter" data-category="personal">Personal</button>
+                    <button class="category-filter" data-category="research">Research</button>
+                    <button class="category-filter" data-category="philosophy">Philosophy</button>
+                    <button class="category-filter" data-category="lifestyle">Lifestyle</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="container" id="articles">
+            <div class="articles" id="articlesContainer">
+                <article class="article-card" data-category="technology">
+                    <div class="category-tag technology">Technology</div>
+                    <h2>The Future of Web Development: Trends and Predictions</h2>
+                    <div class="meta">
+                        <span>December 15, 2024</span>
+                        <span>•</span>
+                        <span>5 min read</span>
+                    </div>
+                    <p>Exploring the evolving landscape of web development, from emerging frameworks to new paradigms that are shaping how we build digital experiences. Learn about the latest trends in React, Vue, performance optimization, and developer experience.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </article>
+
+                <article class="article-card" data-category="philosophy">
+                    <div class="category-tag philosophy">Philosophy</div>
+                    <h2>Reflections on Digital Ethics and Privacy</h2>
+                    <div class="meta">
+                        <span>December 8, 2024</span>
+                        <span>•</span>
+                        <span>8 min read</span>
+                    </div>
+                    <p>In an increasingly connected world, how do we balance technological advancement with fundamental human rights and privacy concerns? A deep dive into the ethical considerations of modern technology.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </article>
+
+                <article class="article-card" data-category="personal">
+                    <div class="category-tag personal">Personal</div>
+                    <h2>Lessons from a Year of Remote Work</h2>
+                    <div class="meta">
+                        <span>November 28, 2024</span>
+                        <span>•</span>
+                        <span>6 min read</span>
+                    </div>
+                    <p>Personal insights and practical tips from navigating the challenges and opportunities of remote work in the modern era. Discover strategies for productivity, communication, and maintaining work-life balance.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </article>
+
+                <article class="article-card" data-category="research">
+                    <div class="category-tag research">Research</div>
+                    <h2>Understanding Machine Learning: A Beginner's Guide</h2>
+                    <div class="meta">
+                        <span>November 15, 2024</span>
+                        <span>•</span>
+                        <span>12 min read</span>
+                    </div>
+                    <p>Demystifying artificial intelligence and machine learning concepts through practical examples and real-world applications. Learn about supervised learning, neural networks, and how AI is transforming industries.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </article>
+
+                <article class="article-card" data-category="technology">
+                    <div class="category-tag technology">Technology</div>
+                    <h2>Building Scalable React Applications</h2>
+                    <div class="meta">
+                        <span>November 8, 2024</span>
+                        <span>•</span>
+                        <span>7 min read</span>
+                    </div>
+                    <p>A comprehensive guide to building React applications that can grow with your needs. Learn about component architecture, state management, performance optimization, and best practices for large-scale applications.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </article>
+
+                <article class="article-card" data-category="lifestyle">
+                    <div class="category-tag lifestyle">Lifestyle</div>
+                    <h2>Finding Balance in a Digital World</h2>
+                    <div class="meta">
+                        <span>October 25, 2024</span>
+                        <span>•</span>
+                        <span>5 min read</span>
+                    </div>
+                    <p>In our increasingly connected world, finding balance between digital engagement and real-world experiences has become crucial. Here are practical strategies for maintaining wellness in the digital age.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </article>
+
+                <article class="article-card" data-category="personal">
+                    <div class="category-tag personal">Personal</div>
+                    <h2>My Journey in Tech: Lessons Learned</h2>
+                    <div class="meta">
+                        <span>October 18, 2024</span>
+                        <span>•</span>
+                        <span>8 min read</span>
+                    </div>
+                    <p>Reflecting on my path in the technology industry, sharing the challenges, victories, and valuable lessons that have shaped my career. From my first coding project to leading complex developments.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </article>
+
+                <article class="article-card" data-category="technology">
+                    <div class="category-tag technology">Technology</div>
+                    <h2>The Art of Clean Code</h2>
+                    <div class="meta">
+                        <span>October 12, 2024</span>
+                        <span>•</span>
+                        <span>6 min read</span>
+                    </div>
+                    <p>Writing clean, maintainable code is both an art and a science. This article explores principles and practices that lead to better code quality, improved team collaboration, and more sustainable software development.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="about-section" id="about">
+            <div class="container">
+                <div class="about-content">
+                    <h2>Who I Am?</h2>
+                    <p>Hello! I'm Geunhwa Jeong, a passionate technologist and writer with a love for creating meaningful digital experiences. My journey in technology has taken me through various domains, from web development to system architecture, always with a focus on building solutions that make a difference.</p>
+                    
+                    <p>I believe in the power of sharing knowledge and experiences. Through this blog, I aim to contribute to the tech community by sharing insights, tutorials, and reflections on both technical and personal growth topics. Whether it's exploring the latest web development trends or reflecting on the philosophical implications of our digital age, I hope to provide valuable perspectives for fellow learners and thinkers.</p>
+                    
+                    <p>When I'm not coding or writing, you can find me exploring new technologies, reading about emerging trends in AI and machine learning, or enjoying time with family and friends. I'm always excited to connect with fellow developers, researchers, and anyone passionate about technology's potential to improve our world.</p>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com" target="_blank">GitHub</a>
+                        <a href="https://www.linkedin.com/in/geunhwa-jeong-354641352" target="_blank">LinkedIn</a>
+                        <a href="mailto:jeonggh892@gmail.com">Email</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Geunhwa Jeong. All rights reserved. Built with passion for sharing knowledge.</p>
+        </div>
+    </footer>
+
     <script>
-      // Add error handling
-      window.addEventListener('error', function(e) {
-        console.error('Error loading:', e.error);
-        document.getElementById('root').innerHTML = '<div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; font-family: system-ui, -apple-system, sans-serif;"><div style="text-align: center;"><h1 style="color: #333; margin-bottom: 16px;">Geunhwa Jeong\'s Website</h1><p style="color: #666;">Loading your blog...</p><p style="color: #999; font-size: 14px;">If this persists, please refresh the page</p></div></div>';
-      });
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.querySelector('.theme-toggle');
+            
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                themeToggle.textContent = '☀️ Light';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeToggle.textContent = '🌙 Dark';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+        
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.querySelector('.theme-toggle').textContent = '☀️ Light';
+            }
+        });
+        
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const articlesContainer = document.getElementById('articlesContainer');
+        const articles = Array.from(articlesContainer.children);
+        
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            
+            articles.forEach(article => {
+                const title = article.querySelector('h2').textContent.toLowerCase();
+                const content = article.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(query) || content.includes(query)) {
+                    article.style.display = 'block';
+                } else {
+                    article.style.display = 'none';
+                }
+            });
+        });
+        
+        // Category filter functionality
+        const categoryFilters = document.querySelectorAll('.category-filter');
+        
+        categoryFilters.forEach(filter => {
+            filter.addEventListener('click', function() {
+                // Remove active class from all filters
+                categoryFilters.forEach(f => f.classList.remove('active'));
+                // Add active class to clicked filter
+                this.classList.add('active');
+                
+                const category = this.dataset.category;
+                
+                articles.forEach(article => {
+                    if (category === 'all' || article.dataset.category === category) {
+                        article.style.display = 'block';
+                    } else {
+                        article.style.display = 'none';
+                    }
+                });
+                
+                // Clear search input when filtering
+                searchInput.value = '';
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
     </script>
-  </body>
+</body>
 </html>
