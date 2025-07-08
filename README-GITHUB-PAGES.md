@@ -45,11 +45,22 @@ git push -u origin main
 
 ## Step 4: Enable GitHub Pages
 
+**Option 1: Automatic Deployment with GitHub Actions (Recommended)**
+
 1. Go to your repository on GitHub
 2. Click on "Settings" tab
 3. Scroll down to "Pages" section
 4. Under "Source", select "GitHub Actions"
 5. The workflow will automatically deploy when you push to main branch
+
+**Option 2: Manual Deployment (If Actions fail)**
+
+1. Go to your repository on GitHub
+2. Click on "Settings" tab
+3. Scroll down to "Pages" section
+4. Under "Source", select "Deploy from a branch"
+5. Choose "main" branch and "/ (root)" folder
+6. Click "Save"
 
 **Important**: Make sure your repository has the following permissions:
 - Go to Settings > Actions > General
