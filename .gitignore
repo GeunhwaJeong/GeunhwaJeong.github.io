@@ -1,15 +1,11 @@
-node_modules
-dist
+node_modules/
 .DS_Store
-server/public
-vite.config.ts.*
-*.tar.gz
-
-# Keep docs folder for GitHub Pages
-!docs
-
-# Keep GitHub Pages files in root
-!index.html
-!assets/
-!.nojekyll
-!CNAME
+*.log
+.env
+dist/
+build/
+.vscode/
+.idea/
+*.tmp
+*.temp
+.cache/
