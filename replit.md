@@ -93,11 +93,33 @@ This is a full-stack personal blog application built with React and Express.js. 
 - **TypeScript**: No-emit compilation for type checking
 - **Database**: Push schema changes directly to database
 
+## GitHub Pages Deployment
+
+### Static Site Generation
+- **Build Script**: `build-static.js` - Builds static version using Vite
+- **Static App**: `client/src/App.static.tsx` - Version optimized for static hosting
+- **Static Query Client**: `client/src/lib/staticQueryClient.ts` - Contains blog data for static deployment
+- **Static HTML**: `client/index.static.html` - Entry point with SEO optimization
+
+### Deployment Process
+- **GitHub Actions**: `.github/workflows/deploy.yml` - Automated deployment workflow
+- **Build Command**: `node build-static.js` - Generates static files in `docs/` folder
+- **Deploy Target**: GitHub Pages serves from `/docs` folder on main branch
+- **Custom Domain**: CNAME file template provided for custom domain setup
+
+### Features
+- Complete static site generation with all original functionality
+- SEO-optimized with proper meta tags and Open Graph support
+- Responsive design with dark/light theme support
+- Mobile-friendly navigation and search functionality
+- Ready for custom domain deployment
+
 ## Changelog
 
 ```
 Changelog:
 - July 08, 2025. Initial setup
+- July 08, 2025. Added GitHub Pages deployment with static site generation
 ```
 
 ## User Preferences

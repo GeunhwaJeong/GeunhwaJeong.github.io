@@ -56,9 +56,20 @@ git push -u origin main
 
 If you want to use a custom domain:
 
-1. In the "Pages" settings, add your custom domain in the "Custom domain" field
-2. Create a CNAME file in the docs folder with your domain name
-3. Set up DNS records with your domain provider to point to GitHub Pages
+1. **Edit the CNAME file**: 
+   - Open `docs/CNAME` file
+   - Uncomment and replace `yourdomain.com` with your actual domain
+   - Example: `blog.yourname.com`
+
+2. **Configure GitHub Pages**:
+   - In the "Pages" settings, add your custom domain in the "Custom domain" field
+   - Wait for DNS check to complete
+
+3. **Set up DNS records** with your domain provider:
+   - For apex domain (yourname.com): Create A records pointing to GitHub Pages IPs
+   - For subdomain (blog.yourname.com): Create CNAME record pointing to your-username.github.io
+
+4. **Enable HTTPS**: GitHub will automatically provision SSL certificate
 
 ## Step 6: Update Content
 

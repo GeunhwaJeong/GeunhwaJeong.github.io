@@ -19,6 +19,11 @@ async function buildStatic() {
         emptyOutDir: true,
         rollupOptions: {
           input: resolve(__dirname, 'client/index.static.html'),
+          output: {
+            entryFileNames: 'assets/[name]-[hash].js',
+            chunkFileNames: 'assets/[name]-[hash].js',
+            assetFileNames: 'assets/[name]-[hash].[ext]',
+          },
         },
       },
       resolve: {
@@ -29,6 +34,16 @@ async function buildStatic() {
       },
       base: './',
     });
+    
+    // Rename the HTML file to index.html for GitHub Pages
+    const fs = await import('fs');
+    const indexStaticPath = resolve(__dirname, 'docs/index.static.html');
+    const indexPath = resolve(__dirname, 'docs/index.html');
+    
+    if (fs.existsSync(indexStaticPath)) {
+      fs.renameSync(indexStaticPath, indexPath);
+      console.log('Renamed index.static.html to index.html');
+    }
     
     console.log('Static site built successfully in ./docs folder!');
     console.log('Ready for GitHub Pages deployment.');
